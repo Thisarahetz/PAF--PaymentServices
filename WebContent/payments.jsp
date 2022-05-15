@@ -15,9 +15,9 @@
 </head>
 <body>
 	<div class="container">
+	<h2  class="fs-1 bg-primary text-wrap">Payment Management</h2>
 		<div class="row">
 			<div class="col-6">
-				<h2 style="text-align:center">Payment Management</h2>
 				<br>
 						<form id="formPayment" name="formPayment" method="post" action="payments.jsp">
 						Payment ID:
@@ -32,6 +32,8 @@
 						Payee Name:
 						<input id="payeename" name="payeename" type="text"
 						class="form-control form-control-sm">
+						 </div>
+						 <div class="col-6">
 						Payment Type:
 						<input id="paymentType" name="paymentType" type="text"
 						class="form-control form-control-sm">
@@ -50,6 +52,7 @@
 						<br>
 						<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">
 						<input type="hidden" id="hidAppIDSave" name="hidAppIDSave" value="">
+						</div>
 						</form>
 						
 						<div id="alertSuccess" class="alert alert-success"></div>
@@ -62,7 +65,9 @@
 							out.print(appObj.readPayment());
 						%>
 						</div>
-			  </div>
+					
+						
+			 
 		  </div>
 	  </div>
 </body>
