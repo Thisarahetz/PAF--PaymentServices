@@ -53,7 +53,7 @@ public class PaymentAPI extends HttpServlet {
 														);
 				
 		response.getWriter().write(output);
-		doGet(request, response);
+		
 	}
 
 	/**
@@ -61,7 +61,23 @@ public class PaymentAPI extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	Map paras = getParasMap(request);
+		
+		String output = paymentObj.updatePayment(
+				paras.get("paymentId").toString(),
+				paras.get("accountId").toString(),
+				paras.get("billId").toString(),
+				paras.get("payeename").toString(),
+				paras.get("paymentType").toString(),
+				paras.get("email").toString(),
+				paras.get("totalamount").toString(),
+				paras.get("amountTobePaid").toString(),
+				paras.get("datePayment").toString()); 
+				
+				response.getWriter().write(output);
+				
 	}
+	
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)

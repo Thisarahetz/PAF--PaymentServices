@@ -38,14 +38,14 @@ $(document).on("click", "#btnSave", function(event)
 		dataType : "text",
 		complete : function(response, status)
 		{   
-			onAppointmentSaveComplete(response.responseText, status);
+			onPaymentSaveComplete(response.responseText, status);
 		}
 	}); 
 });
 
 
-//onAppointmentSaveComplete function
-function onAppointmentSaveComplete(response, status)
+//onPaymentSaveComplete function
+function onPaymentSaveComplete(response, status)
 {
 	if (status == "success")
 	{
@@ -80,16 +80,16 @@ function onAppointmentSaveComplete(response, status)
 //UPDATE=========================================================
 $(document).on("click", ".btnUpdate",function(event)
 {
-	//$("#hidAppIDSave").val(
-			//$(this).closest("tr").find('#hidAppIDUpdate').val());
-	console.log($(this).closest("tr"));
 	document.getElementById("hidAppIDSave").value = "Update";
-	$("#id").val($(this).closest("tr").find('td:eq(0)').text());
-	$("#hospitalid").val($(this).closest("tr").find('td:eq(1)').text());
-	$("#patientid").val($(this).closest("tr").find('td:eq(2)').text());
-	$("#date").val($(this).closest("tr").find('td:eq(3)').text());
-	$("#time").val($(this).closest("tr").find('td:eq(4)').text());
-	$("#description").val($(this).closest("tr").find('td:eq(5)').text());
+	$("#paymentId").val($(this).closest("tr").find('td:eq(0)').text());
+	$("#accountId").val($(this).closest("tr").find('td:eq(1)').text());
+	$("#billId").val($(this).closest("tr").find('td:eq(2)').text());
+	$("#payeename").val($(this).closest("tr").find('td:eq(3)').text());
+	$("#paymentType").val($(this).closest("tr").find('td:eq(4)').text());
+	$("#email").val($(this).closest("tr").find('td:eq(5)').text());
+	$("#totalamount").val($(this).closest("tr").find('td:eq(6)').text());
+	$("#amountTobePaid").val($(this).closest("tr").find('td:eq(7)').text());
+	$("#datePayment").val($(this).closest("tr").find('td:eq(8)').text());
 	
 	
 });
@@ -143,11 +143,16 @@ $("#alertError").show();
 //CLIENT-MODEL============================================
 function validationPaymentForm()
 {
+	//accountId
+	if($("#accountId").val().trim() == "")
+	{
+		return "Insert Account id.";
+	}
 	
 	//billIdid
 	if($("#billId").val().trim() == "")
 	{
-		return "Insert account id.";
+		return "Insert Bill id.";
 	}
 	
 	//Pay name
@@ -156,28 +161,28 @@ function validationPaymentForm()
 		return "Insert PayeeName";
 	}
 	
-	//email
+	//paymentType
 	if($("#email").val().trim() == "")
 	{
-		return "Insert Email.";
+		return "Insert PaymentType.";
 	}
 	
-	//Total amount
+	//email
 	if($("#totalamount").val().trim() == "")
 	{
-		return "Insert time.";
+		return "Insert Email.";
 	}
 	
 	//amount be paid
 	if($("#amountTobePaid").val().trim() == "")
 	{
-		return "Insert description.";
+		return "Insert Amount to be paid.";
 	}
 	
 	//Status
 	if($("#datePayment").val().trim() == "")
 	{
-		return "Insert status.";
+		return "Insert Date Payment.";
 	}
 	
 	

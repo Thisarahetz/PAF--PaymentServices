@@ -11,7 +11,7 @@ public class Payment {
                 Connection con = null; 
                 try
 	        { 
-	            Class.forName("com.mysql.jdbc.Driver"); 
+	            Class.forName("com.mysql.cj.jdbc.Driver"); 
 	    
 	    //Provide the correct details: DBServer/DBName, username, password 
 	    con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/electrogred", "root", ""); 
@@ -67,17 +67,18 @@ public class Payment {
                 preparedStmt.execute(); 
                 con.close(); 
                 String newreadPayment = readPayment();
-                output = "New Payment Create successfully"; 
-            	output = "{\"status\":\"success\", \"data\": \"" + newreadPayment + "\"}";
+                
+                output = "{\"status\":\"success\", \"data\": \"" + newreadPayment + "\"}";
 			}
 			catch (Exception e)
 			{
-				output = "{\"status\":\"error\", \"data\": \"Error while inserting the appointment details. \"}";
+				output = "{\"status\":\"error\", \"data\": \"Error while inserting the Payment details. \"}";
 				System.err.println(e.getMessage());
 			}
 			
 			return output;
 		}
+	
     /**
      * Read readpayment
      * @return payment table
@@ -160,7 +161,7 @@ public class Payment {
      * @param datePayment
      * @return
      */
-    public String updatePayment(String paymentId, String accountId, String billId, String payeeName, String paymentType, String email, Double totalAmountBill, Double amountToBePaid, String datePayment) 
+    public String updatePayment(String paymentId, String accountId, String billId, String payeeName, String paymentType, String email, String totalAmountBill, String amountToBePaid, String datePayment) 
     
     { 
         String output = ""; 
@@ -168,8 +169,7 @@ public class Payment {
     { 
         Connection con = connect(); 
         if (con == null) 
-    { 
-	return "Error while connecting to the database for updating."; } 
+    { return "Error while connecting to the database for updating."; } 
     // create a prepared statement
     String query = "UPDATE payment SET paymentId=?,accountId=?,billId=?,payeeName=?,paymentType=?,email=?,totalAmountBill=?,amountToBePaid=?,datePayment=? WHERE paymentId=?"; 
     PreparedStatement preparedStmt = con.prepareStatement(query); 
@@ -180,22 +180,25 @@ public class Payment {
         preparedStmt.setString(4, payeeName);
         preparedStmt.setString(5, paymentType); 
         preparedStmt.setString(6, email);
-        preparedStmt.setDouble(7, totalAmountBill); 
-        preparedStmt.setDouble(8, amountToBePaid);
+        preparedStmt.setDouble(7, Double.parseDouble(totalAmountBill)); 
+        preparedStmt.setDouble(8, Double.parseDouble(amountToBePaid));
         preparedStmt.setString(9, datePayment); 
         preparedStmt.setString(10, paymentId);
     // execute the statement
     preparedStmt.execute(); 
     con.close(); 
-    output = "Updated successfully"; 
-    } 
-        catch (Exception e) 
-    { 
-        output = "Error while updating the payment."; 
-        System.err.println(e.getMessage()); 
-    } 
-        return output; 
-    } 
+    
+    String newreadPayment = readPayment();
+    output = "{\"status\":\"success\", \"data\": \"" + newreadPayment + "\"}";
+} 
+catch (Exception e) 
+	{ 
+	output = "{\"status\":\"error\", \"data\":\"Error while Updateing the Payment.\"}"; 		
+	System.err.println(e.getMessage()); 
+	} 
+return output; 
+} 
+
 
     
     /**
@@ -224,7 +227,7 @@ public class Payment {
 		    } 
 	    catch (Exception e) 
 	    { 
-	    	output = "{\"status\":\"error\", \"data\":\"Error while deleting the appointment.\"}"; 		
+	    	output = "{\"status\":\"error\", \"data\":\"Error while deleting the Paymnet.\"}"; 		
 			System.err.println(e.getMessage()); 
 	    } 
 	    return output; 

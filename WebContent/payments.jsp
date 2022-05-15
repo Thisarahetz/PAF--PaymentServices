@@ -22,7 +22,7 @@
 						<form id="formPayment" name="formPayment" method="post" action="payments.jsp">
 						Payment ID:
 						<input id="paymentId" name="paymentId" type="text" 
-						class="form-control form-control-sm">
+						class="form-control form-control-sm" >
 						Account ID:
 						<input id="accountId" name="accountId" type="text" 
 						class="form-control form-control-sm"> 
@@ -45,7 +45,7 @@
 						<input id="amountTobePaid" name="amountTobePaid" type="text"
 						class="form-control form-control-sm">
 						Date Payment:
-						<input id="datePayment" name="datePayment" type="text"
+						<input id="datePayment" name="datePayment" type="date"
 						class="form-control form-control-sm">
 						<br>
 						<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">
